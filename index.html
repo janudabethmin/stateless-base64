@@ -17,6 +17,11 @@
       --border: #e2e8f0;
       --success: #10b981;
       --error: #ef4444;
+      --json-key: #d6336c;
+      --json-string: #20b2aa;
+      --json-number: #9932cc;
+      --json-boolean: #ff8c00;
+      --json-null: #708090;
     }
 
     body {
@@ -38,83 +43,110 @@
       box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
       border: 1px solid var(--border);
       width: 100%;
-      max-width: 720px;
-      padding: 24px;
+      max-width: 900px;
+      padding: 32px;
       box-sizing: border-box;
     }
 
     .header {
       text-align: center;
-      margin-bottom: 24px;
+      margin-bottom: 32px;
     }
 
     .header h1 {
-      font-size: 24px;
+      font-size: 28px;
       margin: 0;
       color: var(--primary-dark);
     }
 
     .header p {
-      font-size: 14px;
+      font-size: 16px;
       color: var(--text-light);
-      margin-top: 4px;
+      margin-top: 8px;
     }
 
     .input-group {
       position: relative;
-      margin-bottom: 24px;
+      margin-bottom: 32px;
     }
 
     label {
       font-weight: 500;
-      font-size: 14px;
+      font-size: 16px;
       color: var(--text-light);
-      margin-bottom: 6px;
+      margin-bottom: 8px;
       display: block;
     }
 
     textarea {
       width: 100%;
-      min-height: 120px;
-      padding: 16px 40px 16px 16px;
-      font-size: 15px;
-      border-radius: 8px;
+      min-height: 200px;
+      padding: 20px 50px 20px 20px;
+      font-size: 16px;
+      border-radius: 10px;
       border: 1px solid var(--border);
       resize: vertical;
-      font-family: monospace;
+      font-family: 'Consolas', 'Monaco', monospace;
       box-sizing: border-box;
       background: var(--bg);
       color: var(--text);
+      line-height: 1.5;
+    }
+
+    .input-pretty {
+      width: 100%;
+      min-height: 200px;
+      padding: 20px 50px 20px 20px;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      resize: vertical;
+      font-family: 'Consolas', 'Monaco', monospace;
+      box-sizing: border-box;
+      background: var(--bg);
+      line-height: 1.5;
+      overflow-x: auto;
+      white-space: pre;
     }
 
     .icon-btn {
       position: absolute;
-      top: 32px;
-      width: 20px;
-      height: 20px;
+      top: 40px;
+      width: 24px;
+      height: 24px;
       background: none;
       border: none;
       cursor: pointer;
-      padding: 4px;
+      padding: 6px;
       display: flex;
       align-items: center;
       justify-content: center;
       color: var(--primary);
+      transition: all 0.2s;
+      z-index: 2;
+    }
+
+    .icon-btn:hover {
+      transform: scale(1.1);
+      color: var(--primary-dark);
     }
 
     .icon-copy {
-      right: 36px;
+      right: 46px;
     }
 
     .icon-paste {
-      right: 8px;
+      right: 12px;
+    }
+
+    .icon-edit {
+      right: 12px;
     }
 
     .btn-group {
       display: flex;
-      gap: 12px;
+      gap: 16px;
       flex-wrap: wrap;
-      margin-bottom: 24px;
+      margin-bottom: 32px;
     }
 
     .btn-group button {
@@ -122,10 +154,10 @@
       background: var(--primary);
       color: white;
       border: none;
-      padding: 12px;
-      font-size: 15px;
+      padding: 14px;
+      font-size: 16px;
       font-weight: 500;
-      border-radius: 8px;
+      border-radius: 10px;
       cursor: pointer;
       transition: 0.3s ease;
     }
@@ -140,25 +172,44 @@
 
     .output {
       border: 1px solid var(--border);
-      border-radius: 8px;
-      padding: 16px 40px 16px 16px;
+      border-radius: 10px;
+      padding: 20px 50px 20px 20px;
       background: var(--bg);
-      font-family: monospace;
-      min-height: 120px;
-      white-space: pre-wrap;
+      font-family: 'Consolas', 'Monaco', monospace;
+      min-height: 200px;
+      white-space: pre;
       word-break: break-word;
-      font-size: 15px;
+      font-size: 16px;
+      line-height: 1.5;
+      overflow-x: auto;
+    }
+
+    .json-key {
+      color: var(--json-key);
+    }
+    .json-string {
+      color: var(--json-string);
+    }
+    .json-number {
+      color: var(--json-number);
+    }
+    .json-boolean {
+      color: var(--json-boolean);
+    }
+    .json-null {
+      color: var(--json-null);
     }
 
     .alert {
       position: fixed;
-      bottom: 20px;
+      bottom: 24px;
       left: 50%;
       transform: translateX(-50%);
-      padding: 12px 24px;
-      border-radius: 8px;
+      padding: 14px 28px;
+      border-radius: 10px;
       color: white;
       font-weight: 500;
+      font-size: 16px;
       box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
       z-index: 1000;
     }
@@ -173,22 +224,30 @@
 
     .footer {
       text-align: center;
-      margin-top: 32px;
-      font-size: 13px;
+      margin-top: 40px;
+      font-size: 14px;
       color: var(--text-light);
     }
 
-    @media (max-width: 600px) {
+    @media (max-width: 768px) {
+      .container {
+        padding: 24px;
+      }
+      
+      textarea, .input-pretty, .output {
+        min-height: 150px;
+      }
+      
       .btn-group {
         flex-direction: column;
       }
 
       .icon-copy {
-        right: 36px;
+        right: 46px;
       }
 
-      .icon-paste {
-        right: 8px;
+      .icon-paste, .icon-edit {
+        right: 12px;
       }
     }
   </style>
@@ -203,19 +262,26 @@
 
     <div class="input-group">
       <label for="inputText">Input</label>
-      <textarea id="inputText" placeholder="Enter plain text or Base64 string..."></textarea>
+      <textarea id="inputText" placeholder="Enter plain text or Base64 string..." style="display: none;"></textarea>
+      <div id="inputPretty" class="input-pretty" contenteditable="true" placeholder="Enter plain text or Base64 string..."></div>
       <button class="icon-btn icon-copy" onclick="copyInput()" title="Copy input">
-        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" stroke="currentColor"
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" stroke="currentColor"
           stroke-width="2" viewBox="0 0 24 24">
           <rect x="9" y="9" width="13" height="13" rx="2" />
           <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" />
         </svg>
       </button>
       <button class="icon-btn icon-paste" onclick="pasteInput()" title="Paste into input">
-        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" stroke="currentColor"
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" stroke="currentColor"
           stroke-width="2" viewBox="0 0 24 24">
           <path d="M19 20H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h4l2-2h2l2 2h4a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2z" />
           <polyline points="12 11 12 17 15 14" />
+        </svg>
+      </button>
+      <button id="editBtn" class="icon-btn icon-edit" onclick="toggleEditMode()" title="Edit as plain text" style="display: none;">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" stroke="currentColor"
+          stroke-width="2" viewBox="0 0 24 24">
+          <path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z" />
         </svg>
       </button>
     </div>
@@ -228,8 +294,8 @@
     <div class="output-group">
       <label for="outputText">Output</label>
       <div id="outputText" class="output" aria-live="polite"></div>
-      <button class="icon-btn icon-copy" onclick="copyOutput()" title="Copy output" style="top: 0; right: 8px;">
-        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" stroke="currentColor"
+      <button class="icon-btn icon-copy" onclick="copyOutput()" title="Copy output" style="top: 0; right: 12px;">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" stroke="currentColor"
           stroke-width="2" viewBox="0 0 24 24">
           <rect x="9" y="9" width="13" height="13" rx="2" />
           <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" />
@@ -242,6 +308,7 @@
 
   <script>
     let existingAlert = null;
+    let isEditMode = false;
 
     function showAlert(message, type = "success") {
       if (existingAlert) existingAlert.remove();
@@ -258,22 +325,100 @@
       }, 3000);
     }
 
+    function syntaxHighlight(json) {
+      if (typeof json != 'string') {
+        json = JSON.stringify(json, null, 2);
+      }
+      
+      json = json.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+      
+      return json.replace(
+        /("(\\u[a-zA-Z0-9]{4}|\\[^u]|[^\\"])*"(\s*:)?|\b(true|false|null)\b|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?)/g,
+        function (match) {
+          let cls = 'json-number';
+          if (/^"/.test(match)) {
+            if (/:$/.test(match)) {
+              cls = 'json-key';
+            } else {
+              cls = 'json-string';
+            }
+          } else if (/true|false/.test(match)) {
+            cls = 'json-boolean';
+          } else if (/null/.test(match)) {
+            cls = 'json-null';
+          }
+          return '<span class="' + cls + '">' + match + '</span>';
+        }
+      );
+    }
+
     function tryPrettyJson(str) {
       try {
         const obj = JSON.parse(str);
-        return JSON.stringify(obj, null, 2);
+        return syntaxHighlight(obj);
       } catch {
         return str; // Return original if not JSON
       }
     }
 
+    function formatInput() {
+      const inputText = document.getElementById('inputText');
+      const inputPretty = document.getElementById('inputPretty');
+      const text = inputText.value.trim();
+      
+      if (text) {
+        inputPretty.innerHTML = tryPrettyJson(text);
+      } else {
+        inputPretty.textContent = '';
+      }
+    }
+
+    function toggleEditMode() {
+      const inputText = document.getElementById('inputText');
+      const inputPretty = document.getElementById('inputPretty');
+      const editBtn = document.getElementById('editBtn');
+      
+      isEditMode = !isEditMode;
+      
+      if (isEditMode) {
+        // Switch to textarea
+        inputText.style.display = 'block';
+        inputPretty.style.display = 'none';
+        editBtn.title = 'View formatted';
+        editBtn.innerHTML = `
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" stroke="currentColor"
+            stroke-width="2" viewBox="0 0 24 24">
+            <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
+            <circle cx="12" cy="12" r="3" />
+          </svg>
+        `;
+        inputText.value = inputPretty.textContent;
+        inputText.focus();
+      } else {
+        // Switch to pretty view
+        inputText.style.display = 'none';
+        inputPretty.style.display = 'block';
+        editBtn.title = 'Edit as plain text';
+        editBtn.innerHTML = `
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" stroke="currentColor"
+            stroke-width="2" viewBox="0 0 24 24">
+            <path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z" />
+          </svg>
+        `;
+        formatInput();
+      }
+    }
+
     function encodeText() {
-      const input = stripQuotes(document.getElementById("inputText").value);
-      if (!input) return showAlert("Please enter input to encode.", "error");
+      const inputText = document.getElementById('inputText');
+      const input = isEditMode ? inputText.value : inputText.value || document.getElementById('inputPretty').textContent;
+      const strippedInput = stripQuotes(input);
+      
+      if (!strippedInput) return showAlert("Please enter input to encode.", "error");
 
       try {
-        const encoded = btoa(unescape(encodeURIComponent(input)));
-        document.getElementById("outputText").textContent = encoded;
+        const encoded = btoa(unescape(encodeURIComponent(strippedInput)));
+        document.getElementById("outputText").innerHTML = encoded;
         showAlert("Encoded successfully!");
       } catch {
         showAlert("Encoding failed.", "error");
@@ -281,15 +426,17 @@
     }
 
     function decodeText() {
-      const input = stripQuotes(document.getElementById("inputText").value);
-      if (!input) return showAlert("Please enter Base64 input.", "error");
+      const inputText = document.getElementById('inputText');
+      const input = isEditMode ? inputText.value : inputText.value || document.getElementById('inputPretty').textContent;
+      const strippedInput = stripQuotes(input);
+      
+      if (!strippedInput) return showAlert("Please enter Base64 input.", "error");
 
       try {
-        const cleaned = input.replace(/^data:[^;]+;base64,/, '');
+        const cleaned = strippedInput.replace(/^data:[^;]+;base64,/, '');
         const decoded = decodeURIComponent(escape(atob(cleaned)));
-        // Try to pretty print JSON
-        const formatted = tryPrettyJson(decoded);
-        document.getElementById("outputText").textContent = formatted;
+        // Try to pretty print and highlight JSON
+        document.getElementById("outputText").innerHTML = tryPrettyJson(decoded);
         showAlert("Decoded successfully!");
       } catch {
         showAlert("Invalid Base64 string.", "error");
@@ -305,17 +452,24 @@
     }
 
     function copyInput() {
-      const val = document.getElementById("inputText").value;
+      const inputText = document.getElementById('inputText');
+      const val = isEditMode ? inputText.value : inputText.value || document.getElementById('inputPretty').textContent;
       if (!val) return showAlert("Nothing to copy.", "error");
       copyToClipboard(val);
     }
 
     function pasteInput() {
-      const inputEl = document.getElementById("inputText");
+      const inputEl = document.getElementById('inputText');
+      const inputPretty = document.getElementById('inputPretty');
 
       if (navigator.clipboard && navigator.clipboard.readText) {
         navigator.clipboard.readText().then(text => {
-          inputEl.value = text;
+          if (isEditMode) {
+            inputEl.value = text;
+          } else {
+            inputEl.value = text;
+            formatInput();
+          }
           showAlert("Pasted successfully!", "success");
         }).catch(err => {
           showAlert("Paste failed. Use Ctrl+V manually.", "error");
@@ -340,6 +494,35 @@
       document.body.removeChild(temp);
       showAlert("Copied to clipboard!");
     }
+
+    // Initialize
+    document.addEventListener('DOMContentLoaded', function() {
+      const inputText = document.getElementById('inputText');
+      const inputPretty = document.getElementById('inputPretty');
+      const editBtn = document.getElementById('editBtn');
+      
+      // Show edit button when input has content
+      inputPretty.addEventListener('input', function() {
+        inputText.value = inputPretty.textContent;
+        if (inputPretty.textContent.trim()) {
+          editBtn.style.display = 'flex';
+          formatInput();
+        } else {
+          editBtn.style.display = 'none';
+        }
+      });
+      
+      inputText.addEventListener('input', function() {
+        if (!isEditMode) {
+          formatInput();
+        }
+        if (inputText.value.trim()) {
+          editBtn.style.display = 'flex';
+        } else {
+          editBtn.style.display = 'none';
+        }
+      });
+    });
   </script>
 </body>
 
