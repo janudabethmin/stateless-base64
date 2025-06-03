@@ -238,7 +238,7 @@
     </div>
   </div>
 
-  <div class="footer">Developed by Januda Bethmin</div>
+  <div class="footer">Developed with ♥️ by Januda Bethmin</div>
 
   <script>
     let existingAlert = null;
@@ -256,6 +256,15 @@
         alert.style.opacity = '0';
         setTimeout(() => alert.remove(), 300);
       }, 3000);
+    }
+
+    function tryPrettyJson(str) {
+      try {
+        const obj = JSON.parse(str);
+        return JSON.stringify(obj, null, 2);
+      } catch {
+        return str; // Return original if not JSON
+      }
     }
 
     function encodeText() {
@@ -278,7 +287,9 @@
       try {
         const cleaned = input.replace(/^data:[^;]+;base64,/, '');
         const decoded = decodeURIComponent(escape(atob(cleaned)));
-        document.getElementById("outputText").textContent = decoded;
+        // Try to pretty print JSON
+        const formatted = tryPrettyJson(decoded);
+        document.getElementById("outputText").textContent = formatted;
         showAlert("Decoded successfully!");
       } catch {
         showAlert("Invalid Base64 string.", "error");
